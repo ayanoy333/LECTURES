@@ -1,0 +1,20 @@
+#include<stdio.h>
+
+/**
+ * @brief 
+ * ファイルから
+ * ウィスキーと銘柄と値段を読み取り表示する
+ * @param argc
+ * @param argv
+ * @return int
+ */
+int main(int argc,char **argv)
+{
+    struct whiskey
+    {
+        char name[20];
+        int price;
+    }whiskey;
+}
+FILE *fp;
+fp = fopen("")
