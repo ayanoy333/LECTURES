@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+enum
+{
+    EQUAL,BIG,SMALL,SIMILAR
+};
+void dipMessage(int result)
+{
+    switch (result)
+    {
+    case EQUAL:
+    printf("正解です！\r\n");
+        break;
+    case BIG:
+    printf("数が大きいです\r\n");
+    break;
+    case SMALL:
+    printf("数が小さいです\r\n");
+    break;
+    case SIMILAR:
+    printf("おしい！\r\n");
+    break;    
+    }
+}
+int main 

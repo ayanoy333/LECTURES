@@ -15,6 +15,13 @@ int main(int argc,char **argv)
         char name[20];
         int price;
     }whiskey;
-}
+
 FILE *fp;
-fp = fopen("")
+fp = fopen("lec3.bin","rb");
+while(fread(&whiskey,sizeof(whiskey),1,fp)>0)
+{
+    printf("%s\t%d\r\n",whiskey.name,whiskey.price);
+}
+fclose(fp);
+return 0;
+}
