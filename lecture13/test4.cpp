@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <vector>
+#include <vector>   //ベクトル
 
 class dispBargraph
 {
@@ -10,22 +10,32 @@ private:                //外から見られない
         char name[80];
         int value;
     } bargraph;
-    std::vector<bargraph> bars;      //vectorは<>の中身のタイプを可変長データとして管理できる
+    std::vector<bargraph> bars;      //vectorは<>の中身のタイプを可変長データとして管理できる bargraph型を可変長で保持pushback等可能
                   
 public:                             //外から見られる
-    void append(const char *name, int val)
+    /**
+     * @brief nameとvalueを受け取ってbargraph型変数に値をセットしbarsにpushbackする
+     * 
+     * @param name 
+     * @param val 
+     */
+    void append(const char *name, int val)  
     {
-        bargraph b;
-        strcpy(b.name, name);
-        b.value = val;
-        bars.push_back(b);
+        bargraph b; //bargraph型変数ｂを宣言
+        strcpy(b.name, name);   //b.nameにnameをコピー
+        b.value = val;          //b.valにセット
+        bars.push_back(b);      //barsにpushback
     }
+    /**
+     * @brief 名前を表示しbarを表示
+     * 
+     */
     void dispBar(void)
     {
-        for (int i = 0; i < bars.size(); i++)
+        for (int i = 0; i < bars.size(); i++)   //1つでも入ってればfor文の中に入れる
         {
-            printf("%s\t", bars[i].name);
-            for (int j = 0; j < bars[i].value; j++)
+            printf("%s\t", bars[i].name);   //barsのnameを表示する
+            for (int j = 0; j < bars[i].value; j++) // barsのvalueの分だけ*を表示
             {
                 printf("*");
             }
