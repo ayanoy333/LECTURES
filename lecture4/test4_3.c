@@ -12,7 +12,7 @@ enum
 
 void dispMessage(int result)
 {
-    switch (result)
+    switch (result) //if文の一種
     {
     case EQUAL:
         printf("正解です！\r\n");
