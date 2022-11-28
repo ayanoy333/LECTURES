@@ -17,8 +17,8 @@ int main(int argc,char **argv)
     }whiskey;
 
 FILE *fp;
-fp = fopen("lec3.bin","rb");
-while(fread(&whiskey,sizeof(whiskey),1,fp)>0)
+fp = fopen("lec3.bin","rb");        //read binary
+while(fread(&whiskey,sizeof(whiskey),1,fp)>0)   //while文はLoop条件を判断しながらLoopする
 {
     printf("%s\t%d\r\n",whiskey.name,whiskey.price);
 }

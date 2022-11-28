@@ -21,7 +21,7 @@ int main(int argc,char**argv)
         {"Talisker",450},
     };
     FILE *fp;
-    fp = fopen("lec3.bin","wb");
+    fp = fopen("lec3.bin","wb");          //write binary
     fwrite(whiskeys,sizeof(whiskeys),1,fp);
     fclose(fp);
     return 0;
