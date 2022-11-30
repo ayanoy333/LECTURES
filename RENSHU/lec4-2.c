@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 
-enum
+enum        //列挙型 複数の変数に一連の整数値を付ける
 {
     EQUAL,
     BIG,
     SMALL,
     SIMILAR
 };
-void dipMessage(int result)
+void dipMessage(int result)     //dispmessage?
 {
     switch (result)
     {

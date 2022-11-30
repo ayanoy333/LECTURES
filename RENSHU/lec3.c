@@ -14,7 +14,7 @@ int main(int argc,char**argv)
     fp = fopen("lec3.bin","wb");
     if(fp != NULL)
     {
-        fwrite("nekotyan",sizeof(char),8,fp);
+        fwrite("nekotyan",sizeof(char),8,fp);       //sizeof配列の要素数を求める
         fclose(fp);
     }
     return 0;

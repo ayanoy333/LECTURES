@@ -28,7 +28,7 @@ void dispMessage(int result)
         break;
     }
 }
-int judge(int inputnum, int rndnum)
+int judge(int inputnum, int rndnum)     
 {
     int diff = inputnum - rndnum;
     int result = 0;
