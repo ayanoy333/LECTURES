@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <unistd.h>             //usleepのため
 #include <stdbool.h>
 
-#define WIDTH 80
-#define HEIGHT 25
+#define WIDTH 80                //横幅
+#define HEIGHT 25               //縦幅
 
-char glider_gun[HEIGHT][WIDTH] = {
+char glider_gun[HEIGHT][WIDTH] = {                              //HEIGHTは省略できる　最初の添え字は省略できる
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*'},
@@ -17,7 +17,7 @@ char glider_gun[HEIGHT][WIDTH] = {
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}}; // /80 x 80 のサイズは確保されているが、初期化したいところだけ書けば良い
 
-char tateyoko[HEIGHT][WIDTH] = {
+char tateyoko[HEIGHT][WIDTH] = {        //ブリンカー
     {' ', '*', ' '},
     {' ', '*', ' '},
     {' ', '*', ' '},
@@ -25,10 +25,10 @@ char tateyoko[HEIGHT][WIDTH] = {
 
 /**
  * @brief
- * ３次元配列で WIDTH x HEIGHT を２面用意する
- * fieledは上下と左右がつながるように一回り大きく用意する
+ * ３次元配列で WIDTH x HEIGHT を２面用意する　数える面と結果を保存する面
+ * fieledは上下と左右がつながるように一回り大きく用意する　上下左右1列ずつ多い状態
  */
-char field[2][HEIGHT + 2][WIDTH + 2];
+char field[2][HEIGHT + 2][WIDTH + 2];       
 bool scr; // どちらの面を表示するのかを0，1で表現する
 
 /**
@@ -65,7 +65,7 @@ void initNextScreen(void)
     {
         for (int i = 0; i < WIDTH + 2; i++)
         {
-            field[!scr][j][i] = ' ';
+            field[!scr][j][i] = ' ';            //全部死んだ状態で初期化
         }
     }
 }
@@ -115,17 +115,19 @@ void dead_or_alive()
         for (int i = 0; i < WIDTH; i++)
         {
             // k,l の周囲のセル数を数える
-            int k = i + 1;
+            int k = i + 1;                  //k,lがこれから調べるセルの座標　(y,x)みたいに並んでる　
             int l = j + 1;
             int lifenum =
                 (field[scr][l - 1][k - 1] == '*') + (field[scr][l][k - 1] == '*') + (field[scr][l + 1][k - 1] == '*') +
-                (field[scr][l - 1][k] == '*') + (field[scr][l + 1][k] == '*') +
+                (field[scr][l - 1][k] == '*')                                     + (field[scr][l + 1][k] == '*') +     //真ん中はセルの座標　*が自分の周りにいくつあるか数える
                 (field[scr][l - 1][k + 1] == '*') + (field[scr][l][k + 1] == '*') + (field[scr][l + 1][k + 1] == '*');
+            //誕生：死んでいるセルの周囲に 3つの生きているセルがあれば次の世代では生きる（誕生する）↓ 空白＝死んでる
             if ((field[scr][l][k] == ' ') && (lifenum == 3))
             {
                 // 次のスクリーンにセットする
-                field[!scr][l][k] = '*';
+                field[!scr][l][k] = '*';        //さっき2面用意したfieldのうちの片方
             }
+            //維持：生きているセルの周囲に2つか3つの生きているセルがあれば次の世代でも生き残る↓
             if ((field[scr][l][k] == '*') && ((lifenum == 2) || (lifenum == 3)))
             {
                 // 次のスクリーンに生き残りをセットする
@@ -137,15 +139,15 @@ void dead_or_alive()
 
 void draw(void)
 {
-    system("clear");
+    system("clear");               //画面をクリア
     for (int j = 0; j < HEIGHT; j++)
     {
-        printf("%02d:", j + 1);
+        printf("%02d:", j + 1);     //縦の列を0埋めで2桁表示
         for (int i = 0; i < WIDTH; i++)
         {
             int k = i + 1;
             int l = j + 1;
-            printf("%c", field[scr][l][k]);
+            printf("%c", field[scr][l][k]);     //今のscrの状態を表示を表示
         }
         printf("\r\n");
     }
@@ -153,19 +155,19 @@ void draw(void)
 
 void init()
 {
-    scr = 0;
-    //    loadData(tateyoko);
+    scr = 0;                 //最初の画面は0にする
+   //loadData(tateyoko);      //scrのfieldにデータをセット
     loadData(glider_gun);
 }
 
 int main(int argc, char **argv)
 {
     init();
-    while (1)
+    while (1)       //無限ループ
     {
-        draw();
-        dead_or_alive();
-        scr = !scr;
-        usleep(100 * 1000);
+        draw();                //一回り小さい領域を表示
+        dead_or_alive();       //生死判定       　さっきdeadoraliveで出さなかった方　裏画面
+        scr = !scr;            //画面の切り替え　0，1の切り返し
+        usleep(100 * 1000);    //スリープ命令　100ミリ秒ＣＰが処理を停止
     }
-}
+}       //Ctrl C で終わる
