@@ -9,7 +9,7 @@ enum        //列挙型 複数の変数に一連の整数値を付ける
     SMALL,
     SIMILAR
 };
-void dipMessage(int result)     //dispmessage?
+void dipMessage(int result)     
 {
     switch (result)
     {
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 {
     char input[80];
     int rndnum, inputnum, diff, resulut;
-    while (1)
+    while (1)                           //while(1)　無限ループ
     {
         srand(time(0));
         rndnum = rand() % 10;
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
             diff = inputnum - rndnum;
             if (diff == 0)
                 resulut = EQUAL;
-            else if (abs(diff) < 2)
+            else if (abs(diff) < 2)     //abs 絶対値
                 resulut = SIMILAR;
             else if (diff < 0)
                 resulut = SMALL;

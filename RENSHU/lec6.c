@@ -15,7 +15,7 @@ typedef struct words
 
 int main(int argc, char **argv)
 {
-    bool bFound;
+    bool bFound;            //bool 真理値の２つをとる
     int readCount;
 
     FILE *fp;
@@ -23,8 +23,8 @@ int main(int argc, char **argv)
     char wordbuff[2048];
     char *wp = wordbuff;
 
-    t_words *TopWord = (t_words *)malloc(sizeof(t_words));
-    TopWord->next = NULL;
+    t_words *TopWord = (t_words *)malloc(sizeof(t_words));      //動的メモリ確保
+    TopWord->next = NULL;                                       //どこも指さない
     TopWord->prev = NULL;
     TopWord->word = NULL;
     TopWord->count = 0;

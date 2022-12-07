@@ -4,7 +4,11 @@
 #include<math.h>
 
 
-int hight;
-int weight;
+int bmi;
+
+int div
+{
+    inputnum / 2.4025
+}
 
 // bmi = weight % (hight^2)
