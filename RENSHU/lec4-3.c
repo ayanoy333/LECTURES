@@ -55,7 +55,8 @@ int main(int argc, char **argv)
         {
             printf(">");
             scanf("%s", input);
-            inputnum = input[0] - 0x30;     //
+            inputnum = input[0] - 0x30;     //0x30 を引くと数字の0を返す
+        
             if (input[0] == 'q')
             {
                 printf("終了します\r\n");
