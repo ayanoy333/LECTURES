@@ -15,7 +15,7 @@ bingo TopBingo = {-1, NULL, NULL}; // Topbingoは値を入れない
  * @brief  最後に値を入れる
  * @param num
  */
-void append(int num)
+void append(int num)            //配列の最後に要素を入れる
 {
     bingo *pBingo = TopBingo.next;
     bingo *prev = &TopBingo;
@@ -36,7 +36,7 @@ void append(int num)
  * @param index
  */
 
-int removeAt(int index)
+int removeAt(int index)         //ファイルを消去
 {
     bingo *pBingo = TopBingo.next;
     int i = 0;
