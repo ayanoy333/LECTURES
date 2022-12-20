@@ -137,7 +137,7 @@ int main(int argc, char **argv)
     for (i = 0; i < 75; i++)
     {
         //乱数を生成する
-        rndnum = rndnum = rand() % (75 - i);
+        rndnum = rand() % (75 - i);
         printf("%d ", getAt(rndnum));
         removeAt(rndnum);
     }

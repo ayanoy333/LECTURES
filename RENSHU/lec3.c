@@ -11,7 +11,7 @@
 int main(int argc,char**argv)
 {
     FILE*fp;
-    fp = fopen("lec3.bin","wb");
+    fp = fopen("nekotyan.bin","wb");
     if(fp != NULL)
     {
         fwrite("nekotyan",sizeof(char),8,fp);       //sizeof配列の要素数を求める

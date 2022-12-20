@@ -15,7 +15,7 @@ bingo TopBingo = {-1, NULL, NULL}; // Topbingoは値を入れない
  * @brief  最後に値を入れる
  * @param num
  */
-void append(int num)            //配列の最後に要素を入れる
+void append(int num)            //配列の最後に要素　値を入れる
 {
     bingo *pBingo = TopBingo.next;
     bingo *prev = &TopBingo;
@@ -40,21 +40,22 @@ int removeAt(int index)         //ファイルを消去
 {
     bingo *pBingo = TopBingo.next;
     int i = 0;
-    while (pBingo != NULL && pBingo->next != NULL && i != index)
+    while (pBingo != NULL && pBingo->next != NULL && i != index)        //i != index　の間はnextを辿る
     {
-        pBingo = pBingo->next;
+        pBingo = pBingo->next;                                          //pBingo のnextを辿っていく処理
         i++;
     }
-    if (i != index || pBingo == NULL)
+    if (i != index || pBingo == NULL)                                   //indexまでたどり着けなかった、pBingoがNULLだったらエラー
     {
         // index番目が存在しない場合エラーとして-1を返す
         return -1;
     }
-    if (pBingo->prev != NULL)
-        pBingo->prev->next = pBingo->next;
-    if (pBingo->next != NULL)
+    if (pBingo->prev != NULL)                                       //先頭の手前は何も居ないはずなので処理しない
+        pBingo->prev->next = pBingo->next;                          //prevのnextをpBingoのnextにした(ホワイトボード参照)
+                                                                    //自分の前後の構造体をつなげてる
+    if (pBingo->next != NULL)                                       //最後の次は何も居ないはずなので処理しない
         pBingo->next->prev = pBingo->prev;
-    free(pBingo);
+    free(pBingo);                                                   //前後をつなげたのでいらなくなるから自分をfreeにする
     return 0;
 }
 int getAt(int index)
@@ -137,9 +138,9 @@ int main(int argc, char **argv)
     for (i = 0; i < 75; i++)
     {
         //乱数生成
-        rndnum = rndnum = rand() % (75 - i);
+        rndnum = rand() % (75 - i);             //値を減算していくための処理　
         printf("%d", getAt(rndnum));
-        removeAt(rndnum);
+        removeAt(rndnum);               //メモリ解放
     }
     printf("\r\n\r\n");
 
