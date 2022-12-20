@@ -24,7 +24,7 @@ public:                             //外から見られる
         bargraph b; //bargraph型変数ｂを宣言
         strcpy(b.name, name);   //b.nameにnameをコピー
         b.value = val;          //b.valにセット
-        bars.push_back(b);      //barsにpushback
+        bars.push_back(b);      //barsにpushback  appendと同等な処理
     }
     /**
      * @brief 名前を表示しbarを表示

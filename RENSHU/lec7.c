@@ -33,7 +33,7 @@ int main(int argc,char **argv)
 
     char buff [10];
     char *pbuff = buff;     //char *pbuff = &buffでも同じ
-    strcpy(buff,"aiueo");
+    strcpy(buff,"aiueo");   //文字列型コピー
 
     printf("pbuff = %s\r\n",pbuff);     //%s文字列を出力
     printf("buff = %s\r\n",buff);
