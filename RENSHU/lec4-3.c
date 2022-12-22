@@ -28,13 +28,13 @@ void dispMessage(int result)
         break;
     }
 }
-int judge(int inputnum, int rndnum)
+int judge(int inputnum, int rndnum)     
 {
     int diff = inputnum - rndnum;
     int result = 0;
     if (diff == 0)
         result = EQUAL;
-    else if (abs(diff) < 2)
+    else if (abs(diff) < 2)     //入力された値 ― 正解　₌ １のとき　0の場合は別で作ってあるから１しかない
         result = SIMILAR;
     else if (diff < 0)
         result = SMALL;
@@ -55,7 +55,8 @@ int main(int argc, char **argv)
         {
             printf(">");
             scanf("%s", input);
-            inputnum = input[0] - 0x30;
+            inputnum = input[0] - 0x30;     //0x30 を引くと数字の0を返す
+        
             if (input[0] == 'q')
             {
                 printf("終了します\r\n");

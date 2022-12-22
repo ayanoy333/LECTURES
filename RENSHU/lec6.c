@@ -9,42 +9,47 @@ typedef struct words
 {
     char *word;
     int count;
-    struct words *next;
-    struct words *prev;
+    struct words *next;     //次の構造体、ワード
+    struct words *prev;     //一個前の構造体
 } t_words;
 
 int main(int argc, char **argv)
 {
-    bool bFound;
+    bool bFound;            //bool 真理値の２つをとる
     int readCount;
 
     FILE *fp;
     char buff[BUFF_SIZE];
-    char wordbuff[2048];
+    char wordbuff[2048];            //2048字入るバッファー
     char *wp = wordbuff;
 
-    t_words *TopWord = (t_words *)malloc(sizeof(t_words));
-    TopWord->next = NULL;
+    t_words *TopWord = (t_words *)malloc(sizeof(t_words));      //mallocはmemory allocationで、メモリを確保する命令
+                                                                //動的メモリ確保 (t_words*)の部分はキャスト 別の型にすることができる
+                                                                //mallocの戻り値は(void*)なので、(t_words*)にしている 
+                                                                //mallocの引数はsizeof(t_words)となっていて、sizeofは型のサイズを返すことが出来る
+                                                                //これによって、mallocで確保したt_words分のメモリを、TopWordsで指すようにしている
+    TopWord->next = NULL;                                       //どこも指さない  初期化
     TopWord->prev = NULL;
     TopWord->word = NULL;
     TopWord->count = 0;
 
-    t_words *LastWord = TopWord;
+    t_words *LastWord = TopWord;                                //同じ所を指している　構造体のどこが空いてるかを指すのがLastWord
 
-    for (int i = 1; i < argc; i++)
+    for (int i = 1; i < argc; i++)                              //argv0はプログラム本体を指す　1からが本当の引数
+                                                                // i++for文のループが終わって条件を満たしていれば次のループで実行される
     {
         printf("%sを読みます\r\n", argv[i]);
-        fp = fopen(argv[i], "rb");
-        while (readCount = fread(buff, sizeof(char), BUFF_SIZE, fp))
+        fp = fopen(argv[i], "rb");                              //read binary 
+        while (readCount = fread(buff, sizeof(char), BUFF_SIZE, fp))    //buff->buffer 記憶領域
         {
-            //読み込んだ量がバッファのサイズより小さかったらバッファの残りを0ｘ00で埋めておく
+            //読み込んだ量がバッファのサイズより小さかったらバッファの残りを0ｘ00で埋めておく　ゴミをなくすための処理
             for (int j = readCount; j < BUFF_SIZE; j++)
                 buff[j] = 0x00;
 
-            char *p = &buff[0];
+            char *p = &buff[0];                                 //単語をコピーするための一時的なポインター
             while (p != &buff[BUFF_SIZE])
             {
-                while ((*p == 0x20 || *p == '\r' || *p == '\n') && p != &buff[BUFF_SIZE] && wp == &wordbuff[0])
+                while ((*p == 0x20 || *p == '\r' || *p == '\n') && p != &buff[BUFF_SIZE] && wp == &wordbuff[0]) //空白を飛ばすための処理
                     p++;
                 //単語をwordbuffにコピーするがBUFF_SIZEまで達したらコピー途中でも一度やめる
                 while ((*p != 0x20 && *p != '\r' && *p != '\n') && p != &buff[BUFF_SIZE])
