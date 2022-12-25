@@ -20,15 +20,15 @@ int main(int argc, char* argv[]) {
       sql = "SELECT * from COMPANY";
 
       /* Create a non-transactional object. */
-      nontransaction N(C);
+      nontransaction N(C);                             //コミット、ロールバックの関係無い notransaction (object)
       
       /* Execute SQL query */
-      result R( N.exec( sql ));
+      result R( N.exec( sql ));                       //result型Ｒで包む　Ｒ　ラッパー
       
       /* List down all the records */
-      for (result::const_iterator c = R.begin(); c != R.end(); ++c) {
-         cout << "ID = " << c[0].as<int>() << endl;
-         cout << "Name = " << c[1].as<string>() << endl;
+      for (result::const_iterator c = R.begin(); c != R.end(); ++c) {   //cはイテレーター　ループするとき(繰り返し)begin~end
+         cout << "ID = " << c[0].as<int>() << endl;                     //取り出したカラムが[5]個ある　<<テンプレートとして渡す int型
+         cout << "Name = " << c[1].as<string>() << endl;                //printf でもかける
          cout << "Age = " << c[2].as<int>() << endl;
          cout << "Address = " << c[3].as<string>() << endl;
          cout << "Salary = " << c[4].as<float>() << endl;

@@ -9,5 +9,7 @@ void main(void)
     printf("%02x\r\n",input[0]);
     printf("%d\r\n",input[0]);
     printf("%d\r\n",input[0]-0x30);
-    printf("%d\r\n")
+    printf("%d\r\n"atoi(input));
+    scanf("%d",&i);
+    printf("")
 }
