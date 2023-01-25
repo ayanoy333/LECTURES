@@ -50,8 +50,10 @@ int main(int argc,char**argv)
                 result = SIMILAR;
             else if (diff < 0)
                 result = SMALL;
-            else
-        
+            else if (diff > 0)
+                result = BIG;
+            dispMessage(result);
+            if (result == EQUAL)
             {
                 break;
             }
