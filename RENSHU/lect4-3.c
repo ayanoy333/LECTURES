@@ -4,5 +4,5 @@
 
 enum
 {
-    
-}
+    EQUAL,BIG,SMALL,SIMILAE
+};
