@@ -48,7 +48,7 @@ int main(int argc, char **argv)
     int rndnum, inputnum, diff, result;
     while (1)
     {
-        srand(time(0));
+        srand(time(0));         // current    s = seed,randomseedの種を現在時刻にしてる　 0 は null でも一緒
         rndnum = rand() % 10;
         printf("0-9までの数範囲で乱数を生成しました。\r\n数を当ててください('q')で終了\r\n");
         while (1)
