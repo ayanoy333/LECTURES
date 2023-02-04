@@ -6,6 +6,8 @@ int main(void)
     int i,j;
     unsigned char c[10][10];
 
+    c[0][0] = 0x11;
+    c[1][1] = 0x11;
     // 表示部
     for (j=0;j<10;j++){
         for(i=0;i<10;i++){
